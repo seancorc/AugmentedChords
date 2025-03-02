@@ -122,6 +122,12 @@ def fetch_chords_lyrics(song_name):
         artist_name = tab_view.get("artist_name", chord_result.get("artist_name", "Unknown"))
         tonality_name = tab_view.get("tonality_name", "Unknown")
         
+        # Extract capo information if available
+        capo_information = None
+        if tab_view.get("meta", {}).get("capo") is not None:
+            capo_information = tab_view.get("meta", {}).get("capo")
+            logger.info(f"Found capo information: {capo_information}")
+        
         # Get the chord content
         content = tab_view.get("wiki_tab", {}).get("content", "")
         if not content:
@@ -201,6 +207,7 @@ def fetch_chords_lyrics(song_name):
             "song_title": song_title,
             "artist": artist_name,
             "key": key,
+            "capo": capo_information,
             "lines": lines
         }
         
@@ -232,17 +239,27 @@ def process_intro_section(section_lines, section_pattern, chord_pattern, lines):
             chords = re.findall(chord_pattern, line)
             
             if chords:
+                # Check for repeat indicators after the chords (like "x2", "x4")
+                repeat_info = None
+                # Look for patterns like "x2", "x4" etc. after the chord sequence
+                repeat_match = re.search(r'\s*(x\d+)', line.split('[/ch]')[-1])
+                if repeat_match:
+                    repeat_info = repeat_match.group(1)
+                    logger.info(f"Found repeat indicator: {repeat_info}")
+                
                 # Calculate positions - for bar-formatted intro lines, use evenly spaced positions
                 chord_positions = [i * 10 for i in range(len(chords))]  # Evenly space chords
                 
-                # Add the intro chord line
+                # Add the intro chord line with repeat info
                 lines.append({
                     "section": "Intro",
                     "chords": chords,
                     "chord_positions": chord_positions,
-                    "lyrics": None  # Intro is typically instrumental
+                    "lyrics": None,  # Intro is typically instrumental
+                    "repeat_info": repeat_info  # Add repeat information
                 })
-                logger.info(f"Added Intro line with chords: {chords}")
+                logger.info(f"Added Intro line with chords: {chords}" + 
+                           (f" and repeat info: {repeat_info}" if repeat_info else ""))
 
 def process_regular_section(section_name, section_content, section_pattern, chord_pattern, lines):
     """Process a regular (non-intro) section."""
@@ -284,6 +301,14 @@ def process_chord_lyric_lines(section_name, content_lines, section_pattern, chor
             # Extract chords from positions
             chords = [chord for _, chord in chord_positions]
             positions = [pos for pos, _ in chord_positions]
+            
+            # Check for repeat indicators after the chords (like "x2", "x4")
+            repeat_info = None
+            # Look for patterns like "x2", "x4" etc. after the chord sequence
+            repeat_match = re.search(r'\s*(x\d+)', line.split('[/ch]')[-1])
+            if repeat_match:
+                repeat_info = repeat_match.group(1)
+                logger.info(f"Found repeat indicator in {section_name}: {repeat_info}")
             
             # Look for lyrics in the next line
             lyrics = None
@@ -334,7 +359,8 @@ def process_chord_lyric_lines(section_name, content_lines, section_pattern, chor
                     "section": section_name,
                     "chords": chords,
                     "chord_positions": positions,
-                    "lyrics": lyrics
+                    "lyrics": lyrics,
+                    "repeat_info": repeat_info  # Add repeat information
                 })
         else:
             i += 1

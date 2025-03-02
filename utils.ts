@@ -8,12 +8,14 @@ export interface ScraperResponse {
   song_title: string;
   artist: string;
   key: string;
+  capo?: string | number;  // Add optional capo field
   error?: string; // Add optional error property
   lines: {
     section: string;
     chords: string[];
     chord_positions: number[];
     lyrics: string | null;
+    repeat_info?: string;  // Add optional repeat_info field
   }[];
 }
 
@@ -22,6 +24,7 @@ export interface ChordLyricLine {
   chords: string[];
   chord_positions: number[];
   lyrics: string | null;
+  repeat_info?: string;  // Add optional repeat_info field
 }
 
 // Interface for a song section
@@ -35,6 +38,7 @@ export interface ProcessedSong {
   title: string;
   artist: string;
   key: string;
+  capo?: string | number;  // Add optional capo field
   sections: Section[];
   currentSectionIndex: number;
   currentLineIndex: number;
@@ -76,7 +80,8 @@ export function processSongData(rawData: ScraperResponse): ProcessedSong {
     currentSection.lines.push({
       chords: line.chords,
       chord_positions: line.chord_positions,
-      lyrics: line.lyrics
+      lyrics: line.lyrics,
+      repeat_info: line.repeat_info
     });
   }
   
@@ -105,6 +110,7 @@ export function processSongData(rawData: ScraperResponse): ProcessedSong {
     title: rawData.song_title,
     artist: rawData.artist,
     key: rawData.key,
+    capo: rawData.capo,
     sections: processedSections,
     currentSectionIndex: 0,
     currentLineIndex: 0
@@ -163,7 +169,8 @@ export function chunkLine(line: ChordLyricLine, maxLength: number = 42): ChordLy
   chunks.push({
     chords: firstChunkChords,
     chord_positions: firstChunkPositions,
-    lyrics: line.lyrics.substring(0, lyricBreakPoint)
+    lyrics: line.lyrics.substring(0, lyricBreakPoint),
+    repeat_info: line.repeat_info
   });
   
   // Create second chunk with remaining chords and lyrics
@@ -185,7 +192,8 @@ export function chunkLine(line: ChordLyricLine, maxLength: number = 42): ChordLy
     chunks.push({
       chords: remainingChords,
       chord_positions: remainingPositions,
-      lyrics: line.lyrics.substring(lyricBreakPoint).trim()
+      lyrics: line.lyrics.substring(lyricBreakPoint).trim(),
+      repeat_info: line.repeat_info
     });
   }
   
@@ -228,7 +236,8 @@ function splitInstrumentalLine(line: ChordLyricLine, maxLength: number = 50): Ch
       chunks.push({
         chords: currentChunkChords,
         chord_positions: currentChunkPositions,
-        lyrics: null
+        lyrics: null,
+        repeat_info: line.repeat_info
       });
       
       // Reset for a new chunk
@@ -252,7 +261,8 @@ function splitInstrumentalLine(line: ChordLyricLine, maxLength: number = 50): Ch
     chunks.push({
       chords: currentChunkChords,
       chord_positions: currentChunkPositions,
-      lyrics: null
+      lyrics: null,
+      repeat_info: line.repeat_info
     });
   }
   
@@ -316,6 +326,11 @@ export function formatLineForDisplay(line: ChordLyricLine, isNewSection: boolean
       const before = chordLine.substring(0, pos);
       const after = chordLine.substring(pos + chord.length);
       chordLine = before + chord + after;
+    }
+    
+    // Add repeat information if present (like "x2")
+    if (line.repeat_info) {
+      chordLine = chordLine.trimRight() + '    ' + line.repeat_info;
     }
   }
   
