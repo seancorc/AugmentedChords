@@ -1,0 +1,848 @@
+{
+  "success": true,
+  "song_title": "Stairway To Heaven",
+  "artist": "Led Zeppelin",
+  "key": "A",
+  "lines": [
+    {
+      "section": "Intro",
+      "chords": [
+        "Am",
+        "Cmaj7/G#",
+        "C/G",
+        "D/F#",
+        "Fmaj7",
+        "Am/B",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "lyrics": null
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Fmaj7",
+        "Am",
+        "Cmaj7/G#",
+        "C/G",
+        "D/F#"
+      ],
+      "chord_positions": [
+        0,
+        12,
+        22,
+        38,
+        50
+      ],
+      "lyrics": "There's a lady who's sure all that glitters is gold"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Fmaj7",
+        "Am/B",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        26,
+        36
+      ],
+      "lyrics": "And she's buying a stairway to heaven"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Fmaj7",
+        "Am",
+        "Cmaj7/G#",
+        "C/G",
+        "D/F#"
+      ],
+      "chord_positions": [
+        0,
+        12,
+        26,
+        43,
+        58
+      ],
+      "lyrics": "When she gets there she knows, if the stores are all closed"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Fmaj7",
+        "Am/B",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        29,
+        40
+      ],
+      "lyrics": "With a word she can get what she came for"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "D",
+        "Fmaj7",
+        "Am",
+        "C",
+        "G",
+        "Dsus4",
+        "D"
+      ],
+      "chord_positions": [
+        0,
+        5,
+        10,
+        16,
+        26,
+        34,
+        42,
+        49
+      ],
+      "lyrics": "Ooh, ooh,    and she's buying a stairway to heaven"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "Cmaj7",
+        "D",
+        "Fmaj7",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        11,
+        23,
+        38,
+        50
+      ],
+      "lyrics": "There's a sign on the wall but she wants to be sure"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "C",
+        "D",
+        "Fmaj7"
+      ],
+      "chord_positions": [
+        0,
+        15,
+        32,
+        48
+      ],
+      "lyrics": "'Cause you know sometimes words have two meanings"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Fmaj7",
+        "Am",
+        "Cmaj7/G#",
+        "C/G",
+        "D/F#"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        21,
+        38,
+        52
+      ],
+      "lyrics": "In a tree by the brook, there's a songbird who sings,"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "D/F#",
+        "C",
+        "Am/B",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        12,
+        32,
+        41
+      ],
+      "lyrics": "Sometimes all of our thoughts are misgiven"
+    },
+    {
+      "section": "Bridge",
+      "chords": [
+        "Am7",
+        "Am",
+        "Dsus2",
+        "D",
+        "Am7",
+        "Am",
+        "Em",
+        "D",
+        "C",
+        "D"
+      ],
+      "chord_positions": [
+        0,
+        2,
+        5,
+        7,
+        11,
+        14,
+        16,
+        18,
+        20,
+        22
+      ],
+      "lyrics": "Ooh, it makes me wonder"
+    },
+    {
+      "section": "Bridge",
+      "chords": [
+        "Am7",
+        "Am",
+        "Dsus2",
+        "D",
+        "Am7",
+        "Am",
+        "Em",
+        "D",
+        "C",
+        "D"
+      ],
+      "chord_positions": [
+        0,
+        2,
+        5,
+        7,
+        11,
+        14,
+        16,
+        18,
+        20,
+        22
+      ],
+      "lyrics": "Ooh, it makes me wonder"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "D",
+        "C",
+        "G/B",
+        "Asus2",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        13,
+        24,
+        38,
+        47
+      ],
+      "lyrics": "There's a feeling I get when I look to the west,"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "C",
+        "G/B",
+        "Fmaj7#11",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        8,
+        17,
+        25,
+        34
+      ],
+      "lyrics": "And my spirit is crying for leaving"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "C",
+        "G/B",
+        "Asus2",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        12,
+        23,
+        46,
+        59
+      ],
+      "lyrics": "In my thoughts I have seen rings of smoke through the trees,"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "C",
+        "G/B",
+        "Fmaj7",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        9,
+        18,
+        32,
+        40
+      ],
+      "lyrics": "And the voices of those who stand looking"
+    },
+    {
+      "section": "Bridge",
+      "chords": [
+        "Am7",
+        "Am",
+        "Dsus2",
+        "D",
+        "Am7",
+        "Am",
+        "Em",
+        "D",
+        "C",
+        "D"
+      ],
+      "chord_positions": [
+        0,
+        2,
+        5,
+        7,
+        11,
+        14,
+        16,
+        18,
+        20,
+        22
+      ],
+      "lyrics": "Ooh, it makes me wonder"
+    },
+    {
+      "section": "Bridge",
+      "chords": [
+        "Am7",
+        "Am",
+        "Dsus2",
+        "D",
+        "Am7",
+        "Am",
+        "Em",
+        "D",
+        "C",
+        "D"
+      ],
+      "chord_positions": [
+        0,
+        3,
+        6,
+        9,
+        16,
+        19,
+        22,
+        24,
+        27,
+        29
+      ],
+      "lyrics": "Ooh, it really makes me wonder"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "D",
+        "C",
+        "G/B",
+        "Asus2",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        13,
+        29,
+        41,
+        51
+      ],
+      "lyrics": "And it's whispered that soon if we all call the tune"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "D",
+        "C",
+        "G/B",
+        "Fmaj7#11"
+      ],
+      "chord_positions": [
+        0,
+        13,
+        26,
+        36
+      ],
+      "lyrics": "Then the piper will lead us to reason"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "D",
+        "C",
+        "G/B",
+        "Asus2",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        12,
+        26,
+        38,
+        47
+      ],
+      "lyrics": "And a new day will dawn for those who stand long"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "D",
+        "C",
+        "G/B",
+        "Fmaj7#11"
+      ],
+      "chord_positions": [
+        0,
+        13,
+        27,
+        38
+      ],
+      "lyrics": "And the forests will echo with laughter"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G/B",
+        "Am",
+        "Am/B"
+      ],
+      "chord_positions": [
+        0,
+        17,
+        36,
+        58
+      ],
+      "lyrics": "If there's a bustle in your hedgerow, don't be alarmed now,"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G/B",
+        "Fmaj7",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        13,
+        31,
+        41
+      ],
+      "lyrics": "It's just a spring clean for the May Queen"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G/B",
+        "Am",
+        "Am/B"
+      ],
+      "chord_positions": [
+        0,
+        18,
+        39,
+        58
+      ],
+      "lyrics": "Yes, there are two paths you can go by, but in the long run"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G/B",
+        "Fmaj7",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        15,
+        33,
+        46
+      ],
+      "lyrics": "There's still time to change the road you're on"
+    },
+    {
+      "section": "Bridge",
+      "chords": [
+        "Am7",
+        "Am",
+        "Dsus2",
+        "D",
+        "Am7",
+        "Am",
+        "Em",
+        "D",
+        "C",
+        "D"
+      ],
+      "chord_positions": [
+        0,
+        2,
+        5,
+        7,
+        11,
+        14,
+        16,
+        18,
+        20,
+        22
+      ],
+      "lyrics": "Ooh, it makes me wonder"
+    },
+    {
+      "section": "Bridge",
+      "chords": [
+        "Am7",
+        "Am",
+        "Dsus2",
+        "D",
+        "Am7",
+        "Am",
+        "Em",
+        "D",
+        "C",
+        "D"
+      ],
+      "chord_positions": [
+        0,
+        3,
+        6,
+        9,
+        16,
+        19,
+        22,
+        24,
+        27,
+        29
+      ],
+      "lyrics": "Ooh, it really makes me wonder"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G/B",
+        "Am",
+        "Am/B"
+      ],
+      "chord_positions": [
+        0,
+        17,
+        37,
+        60
+      ],
+      "lyrics": "Your head is humming and it won't go, in case you don't know,"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G/B",
+        "Fmaj7",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        12,
+        25,
+        34
+      ],
+      "lyrics": "The piper's calling you to join him"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G/B",
+        "Am",
+        "Am/B"
+      ],
+      "chord_positions": [
+        0,
+        14,
+        33,
+        54
+      ],
+      "lyrics": "Dear lady, can you hear the wind blow, and did you know"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G/B",
+        "Fmaj7",
+        "Am"
+      ],
+      "chord_positions": [
+        0,
+        14,
+        28,
+        40
+      ],
+      "lyrics": "Your stairway lies on the whispering wind"
+    },
+    {
+      "section": "Instrumental",
+      "chords": [
+        "C",
+        "G",
+        "D",
+        "Dsus2",
+        "D",
+        "Dsus4"
+      ],
+      "chord_positions": [
+        0,
+        13,
+        26,
+        39,
+        56,
+        69
+      ],
+      "lyrics": null
+    },
+    {
+      "section": "Instrumental",
+      "chords": [
+        "Dsus2",
+        "D",
+        "Dsus4",
+        "Dsus2",
+        "D",
+        "Dsus4",
+        "Dsus4",
+        "D",
+        "Cadd9"
+      ],
+      "chord_positions": [
+        0,
+        17,
+        30,
+        47,
+        64,
+        77,
+        93,
+        109,
+        121
+      ],
+      "lyrics": null
+    },
+    {
+      "section": "Instrumental",
+      "chords": [
+        "Am",
+        "Am7",
+        "Fmaj7"
+      ],
+      "chord_positions": [
+        0,
+        12,
+        25
+      ],
+      "lyrics": null
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "G/G#"
+      ],
+      "chord_positions": [
+        0,
+        9,
+        23,
+        30
+      ],
+      "lyrics": "And as we wind on down the road"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "G/G#"
+      ],
+      "chord_positions": [
+        0,
+        11,
+        24,
+        31
+      ],
+      "lyrics": "Our shadows taller than our soul"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "G/G#"
+      ],
+      "chord_positions": [
+        0,
+        11,
+        22,
+        29
+      ],
+      "lyrics": "There walks a lady we all know"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "G/G#"
+      ],
+      "chord_positions": [
+        0,
+        15,
+        31,
+        39
+      ],
+      "lyrics": "Who shines white light and wants to show"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "G/G#"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        25,
+        33
+      ],
+      "lyrics": "How everything still turns to gold"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "G/G#"
+      ],
+      "chord_positions": [
+        0,
+        9,
+        19,
+        26
+      ],
+      "lyrics": "And if you listen very hard"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "G/G#"
+      ],
+      "chord_positions": [
+        0,
+        11,
+        24,
+        32
+      ],
+      "lyrics": "The tune will come to you at last"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "G/G#"
+      ],
+      "chord_positions": [
+        0,
+        11,
+        23,
+        30
+      ],
+      "lyrics": "When all are one and one is all"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "G/G#"
+      ],
+      "chord_positions": [
+        0,
+        8,
+        20,
+        27
+      ],
+      "lyrics": "To be a rock and not to roll"
+    },
+    {
+      "section": "Instrumental",
+      "chords": [
+        "Am",
+        "Am7"
+      ],
+      "chord_positions": [
+        0,
+        12
+      ],
+      "lyrics": null
+    },
+    {
+      "section": "Instrumental",
+      "chords": [
+        "Fmaj7"
+      ],
+      "chord_positions": [
+        0
+      ],
+      "lyrics": null
+    }
+  ]
+}

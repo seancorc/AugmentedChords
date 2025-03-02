@@ -1,0 +1,622 @@
+{
+  "success": true,
+  "song_title": "Let It Be",
+  "artist": "The Beatles",
+  "key": "C",
+  "lines": [
+    {
+      "section": "Intro",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "Fmaj7",
+        "F6"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "lyrics": null
+    },
+    {
+      "section": "Intro",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "lyrics": null
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "Am/G",
+        "Fmaj7",
+        "F6"
+      ],
+      "chord_positions": [
+        0,
+        15,
+        32,
+        42,
+        51,
+        62
+      ],
+      "lyrics": "When I find myself in times of trouble, Mother Mary comes to me"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        20,
+        24,
+        29,
+        34
+      ],
+      "lyrics": "Speaking words of wisdom, let it be"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "Am/G",
+        "Fmaj7",
+        "F6"
+      ],
+      "chord_positions": [
+        0,
+        14,
+        31,
+        41,
+        52,
+        63
+      ],
+      "lyrics": "And in my hour of darkness, she is standing right in front of me"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        20,
+        24,
+        29,
+        34
+      ],
+      "lyrics": "Speaking words of wisdom, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        14,
+        28,
+        41
+      ],
+      "lyrics": "Let it be, let it be, let it be, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        19,
+        23,
+        28,
+        33
+      ],
+      "lyrics": "Whisper words of wisdom, let it be"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "Am/G",
+        "Fmaj7",
+        "F6"
+      ],
+      "chord_positions": [
+        0,
+        15,
+        30,
+        41,
+        50,
+        60
+      ],
+      "lyrics": "And when the broken hearted people, living in the world agree"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        19,
+        24,
+        29,
+        33
+      ],
+      "lyrics": "There will be an answer, let it be"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "Am/G",
+        "Fmaj7",
+        "F6"
+      ],
+      "chord_positions": [
+        0,
+        19,
+        34,
+        47,
+        61,
+        72
+      ],
+      "lyrics": "For though they may be parted, there is still a chance that they will see"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        19,
+        24,
+        29,
+        33
+      ],
+      "lyrics": "There will be an answer, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        13,
+        27,
+        41
+      ],
+      "lyrics": "Let it be, let it be, let it be, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        19,
+        23,
+        28,
+        33
+      ],
+      "lyrics": "There will be an answer, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        14,
+        27,
+        41
+      ],
+      "lyrics": "Let it be, let it be, let it be, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        19,
+        23,
+        28,
+        33
+      ],
+      "lyrics": "Whisper words of wisdom, let it be"
+    },
+    {
+      "section": "Instrumental",
+      "chords": [
+        "F",
+        "C/E",
+        "Dm7",
+        "C",
+        "Bb",
+        "F/A",
+        "G",
+        "F",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        13,
+        26,
+        39,
+        52,
+        64,
+        77,
+        91,
+        105
+      ],
+      "lyrics": null
+    },
+    {
+      "section": "Solo",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "F",
+        "C",
+        "G",
+        "F",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        12,
+        24,
+        37,
+        49,
+        61,
+        73,
+        85
+      ],
+      "lyrics": null
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        13,
+        27,
+        41
+      ],
+      "lyrics": "Let it be, let it be, let it be, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        19,
+        23,
+        28,
+        33
+      ],
+      "lyrics": "Whisper words of wisdom, let it be"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G"
+      ],
+      "chord_positions": [
+        0,
+        27
+      ],
+      "lyrics": "And when the night is cloudy,"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "Am",
+        "Am/G",
+        "Fmaj7",
+        "F6"
+      ],
+      "chord_positions": [
+        0,
+        15,
+        26,
+        39
+      ],
+      "lyrics": "There is still a light that shines on me"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        8,
+        18,
+        22,
+        27,
+        32
+      ],
+      "lyrics": "Shine on till tomorrow, let it be"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "Am/G",
+        "Fmaj7",
+        "F6"
+      ],
+      "chord_positions": [
+        0,
+        13,
+        28,
+        37,
+        45,
+        55
+      ],
+      "lyrics": "I wake up to the sound of music, Mother Mary comes to me"
+    },
+    {
+      "section": "Verse",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        20,
+        24,
+        29,
+        34
+      ],
+      "lyrics": "Speaking words of wisdom, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        14,
+        28,
+        41
+      ],
+      "lyrics": "Let it be, let it be, let it be, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        10,
+        19,
+        23,
+        28,
+        33
+      ],
+      "lyrics": "There will be an answer, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        14,
+        28,
+        41
+      ],
+      "lyrics": "Let it be, let it be, let it be, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        11,
+        22,
+        27,
+        33,
+        38
+      ],
+      "lyrics": "There will be an answer, let it be eeee"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        14,
+        28,
+        44
+      ],
+      "lyrics": "Let it be, let it be, let it be, ya let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": [
+        "C",
+        "G",
+        "F",
+        "C/E",
+        "Dm7",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        12,
+        23,
+        29,
+        35,
+        41
+      ],
+      "lyrics": "Whisper words of wisdom, let it be eeeeeee"
+    },
+    {
+      "section": "Outro",
+      "chords": [
+        "F",
+        "C/E",
+        "Dm7",
+        "C",
+        "Bb",
+        "F/A",
+        "G",
+        "F",
+        "C"
+      ],
+      "chord_positions": [
+        0,
+        13,
+        26,
+        39,
+        52,
+        64,
+        77,
+        91,
+        105
+      ],
+      "lyrics": null
+    }
+  ]
+}

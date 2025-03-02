@@ -1,61 +1,89 @@
-# AugmentOS-Cloud-Example-App
+# Guitar Chord Scraper
 
+A Python script for extracting chord data from Ultimate Guitar.
 
-![header](https://github.com/user-attachments/assets/f69defec-7011-45f2-b258-94e6c712a758)
+## Overview
 
-### Download AugmentOS on your phone
+This project provides a script that scrapes chord data for songs from Ultimate Guitar. It extracts the chord progressions, key, artist information, and organizes the chords into measures.
 
-[Download links](https://drive.google.com/drive/folders/1l99ffBiWHnAe06HSJcgjIG-SnMuio70_?usp=sharing)
+## Features
 
-You *probably* want staging, unless you want raw audio bytes. If you want raw audio bytes, you want dev.
+- Searches for songs on Ultimate Guitar by title
+- Extracts chord progressions, song title, artist name, and key
+- Organizes chords into measures (assuming 4/4 time)
+- Supports error handling and logging
+- Returns structured JSON data
 
-### Set up ngrok
+## Installation
 
-1. `brew install ngrok`
+1. Clone this repository
+2. Install required packages:
 
-2. Make an ngrok account
-
-3. [Use ngrok to make a static address/URL](https://dashboard.ngrok.com/)
-
-### Register your APP with AugmentOS
-
-<img width="181" alt="image" src="https://github.com/user-attachments/assets/36192c2b-e1ba-423b-90de-47ff8cd91318" />
-
-1. Navigate to [AugmentOS.dev](https://augmentos.dev/)
-
-2. Click "Sign In", and log in with the same Google account you're using for AugmentOS
-
-3. Click "Create App"
-
-4. Set a UNIQUE package name like `org.yourlastname.yoursocialsecuritynumber`
-
-5. For webhook url, enter your ngrok's static url, appended by `webhook`
-    * EX: 
-        * If you Ngrok URL is: `https://my-static-url.ngrok-free.app`
-        * Then you enter `https://my-static-url.ngrok-free.app/webhook`
-
-![guide](https://github.com/user-attachments/assets/681df211-ea1a-4fd9-9563-f1f7c81e9565)
-
-### Get your APP running!
-
-1. [Install bun](https://bun.sh/docs/installation)
-
-2. Clone this repo: `git clone git@github.com:AugmentOS-Community/AugmentOS-Cloud-Example-App.git`
-
-3. cd into your repo, then type `bun install`
-
-4. Edit your `index.ts` to match the app you registered at [AugmentOS.dev](https://augmentos.dev/)
-    
-```typescript
-const app = new ExampleAugmentOSApp({
-  packageName: 'org.yourlastname.yoursocialsecuritynumber', // make sure this matches your app in dev console
-  apiKey: 'your_api_key', // Not used right now, can be anything
-  port: 3000, // The port you're hosting the server on
-  augmentOSWebsocketUrl: 'wss://dev.augmentos.org/tpa-ws' //AugmentOS url
-});
+```bash
+pip install requests beautifulsoup4 python-dotenv
 ```
 
-7. Run your app with `bun run index.ts`
+## Usage
 
-8. To expose your app to the internet (and thus AugmentOS) with ngrok, run: `ngrok http --url=civil-frankly-javelin.ngrok-free.app 3000`
-    * `3000` is the port. It must match what is in the app config. If you entered `port: 8080`, use `8080` for ngrok instead.
+Run the script from the command line, providing a song name as an argument:
+
+```bash
+python fetch_chords_scrape.py "Wonderwall"
+```
+
+The script will return a JSON object with the following structure:
+
+```json
+{
+  "success": true,
+  "song_title": "Wonderwall",
+  "artist": "Oasis",
+  "key": "F#m",
+  "chords": [
+    ["F#m7", "A", "Esus4", "B7sus4"],
+    ["F#m7", "A", "Esus4", "B7sus4"],
+    // More measures...
+  ]
+}
+```
+
+## How It Works
+
+The script:
+
+1. Searches Ultimate Guitar for the requested song
+2. Identifies the first chord result from the search data
+3. Fetches the chord page for that result
+4. Extracts JSON data embedded in the page
+5. Processes the chord content into measures
+6. Returns structured data with song information and chords
+
+## Error Handling
+
+The script handles various error scenarios:
+- HTTP request failures
+- Missing chord data
+- JSON parsing errors
+- Unable to find chord results
+
+Error responses include:
+```json
+{
+  "success": false,
+  "error": "Error message",
+  "chords": []
+}
+```
+
+## Implementation Notes
+
+The script uses:
+- BeautifulSoup for HTML parsing
+- Requests for HTTP requests
+- Regular expressions to extract chords from content
+- JSON parsing to extract data from the page
+
+## License
+
+MIT
+    

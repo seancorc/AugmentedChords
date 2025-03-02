@@ -2,30 +2,69 @@ import { TpaServer, TpaSession } from '@augmentos/sdk';
 import * as readline from 'readline';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { 
+  ScraperResponse, 
+  ProcessedSong,
+  processSongData, 
+  navigateNext,
+  navigatePrevious,
+  getCurrentLine,
+  getNavigationInfo,
+  jumpToSection
+} from './utils';
 
 // Convert exec to Promise-based
 const execPromise = promisify(exec);
 
-// Default song chords as a fallback
-const DEFAULT_SONG_CHORDS = [
-  "C Am G C",       // Measure 1
-  "F G C Em",       // Measure 2
-  "Am F C G",       // Measure 3
-  "F G7 C C7",      // Measure 4
-  "F Fm C A7",      // Measure 5
-  "Dm G7 C Am",     // Measure 6
-  "F G Am Em",      // Measure 7
-  "F G7 C -",       // Measure 8
-  "Am E7 Am C7",    // Measure 9
-  "F G7 C -"        // Measure 10
-];
+// Default song as a fallback (simple version of "Let It Be")
+const DEFAULT_SONG: ScraperResponse = {
+  "success": true,
+  "song_title": "Let It Be",
+  "artist": "The Beatles",
+  "key": "C",
+  "lines": [
+    {
+      "section": "Intro",
+      "chords": ["C", "G", "Am", "F"],
+      "chord_positions": [0, 8, 16, 24],
+      "lyrics": null
+    },
+    {
+      "section": "Verse",
+      "chords": ["C", "G", "Am", "F"],
+      "chord_positions": [0, 17, 24, 33],
+      "lyrics": "When I find myself in times of trouble"
+    },
+    {
+      "section": "Verse",
+      "chords": ["C", "G", "F", "C"],
+      "chord_positions": [0, 13, 20, 30],
+      "lyrics": "Mother Mary comes to me"
+    },
+    {
+      "section": "Verse",
+      "chords": ["C", "G", "Am", "F"],
+      "chord_positions": [0, 13, 20, 27],
+      "lyrics": "Speaking words of wisdom, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["F", "Em", "Dm", "C"],
+      "chord_positions": [0, 6, 14, 21],
+      "lyrics": "Let it be, let it be, let it be, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["C", "G", "F", "C"],
+      "chord_positions": [0, 13, 20, 30],
+      "lyrics": "Whisper words of wisdom, let it be"
+    }
+  ]
+};
 
 class AugmentedChordsApp extends TpaServer {
-  private currentStartIndex = 0;
+  private currentSong: ProcessedSong | null = null;
   private isShowingMessage = false; // Flag to track when displaying transitional messages
-  private songChords = [...DEFAULT_SONG_CHORDS]; // Start with the default song
-  private currentSongTitle = "Default Song";
-  private currentSongKey = "C"; // Default key for the default song
 
   protected async onSession(session: TpaSession, sessionId: string, userId: string): Promise<void> {
     // Setup keyboard input listener for the footswitch
@@ -39,6 +78,9 @@ class AugmentedChordsApp extends TpaServer {
       
       // Wait a moment before showing chords
       setTimeout(() => {
+        // Initialize with default song
+        this.currentSong = processSongData(DEFAULT_SONG);
+        
         // Initial display of chords
         this.isShowingMessage = false; // Enable input after showing chords
         this.updateChordDisplay(session);
@@ -69,24 +111,47 @@ class AugmentedChordsApp extends TpaServer {
           } else if (transcription.includes("help") || transcription.includes("instructions")) {
             // Show help message
             this.isShowingMessage = true;
-            session.layouts.showDoubleTextWall("Voice Commands:\n- 'play [song name by artist]'\n- 'help'", 
-              "Navigation:\n- Right arrow: Next\n- Left arrow: Prev");
+            session.layouts.showDoubleTextWall(
+              "Voice Commands:\n- 'play [song name]'\n- 'go to [section name]'\n- 'help'", 
+              "Navigation:\n- Right arrow: Next line\n- Left arrow: Previous line"
+            );
             
             setTimeout(() => {
               this.isShowingMessage = false;
               this.updateChordDisplay(session);
             }, 5000);
+          } else {
+            // Check for "go to [section]" command
+            const sectionCommandMatch = transcription.match(/(?:^|\.\s+|\!\s+|\?\s+)\b(?:go\s+to)(?:\s+the)?\s+(.+?)(?:\.|\?|!|$)/i);
+            if (sectionCommandMatch && this.currentSong) {
+              const sectionName = sectionCommandMatch[1].trim();
+              console.log(`Section jump request detected: "${sectionName}"`);
+              
+              // Try to jump to the requested section
+              const updatedSong = jumpToSection(this.currentSong, sectionName);
+              
+              // Check if we actually jumped (did we find the section?)
+              if (updatedSong.currentSectionIndex !== this.currentSong.currentSectionIndex) {
+                this.currentSong = updatedSong;
+                session.layouts.showTextWall(`Jumping to ${sectionName}...`);
+                
+                setTimeout(() => {
+                  this.isShowingMessage = false;
+                  this.updateChordDisplay(session);
+                }, 1500);
+              } else {
+                // Section not found
+                session.layouts.showTextWall(`Section "${sectionName}" not found`);
+                
+                setTimeout(() => {
+                  this.isShowingMessage = false;
+                  this.updateChordDisplay(session);
+                }, 2000);
+              }
+            }
           }
         }
       }),
-
-      // session.events.onPhoneNotifications((data) => {
-      //   console.log('Phone notification:', data);
-      // }),
-
-      // session.events.onGlassesBattery((data) => {
-      //   console.log('Glasses battery:', data);
-      // }),
 
       session.events.onError((error) => {
         console.error('Error:', error);
@@ -117,8 +182,8 @@ class AugmentedChordsApp extends TpaServer {
       const escapedSongName = songName.replace(/'/g, "'\\''");
       
       // Execute the Python script with the song name as an argument
-      // Use the Python interpreter from the virtual environment
-      const { stdout, stderr } = await execPromise(`./venv/bin/python ./fetch_chords.py '${escapedSongName}'`);
+      // Now using our fetch_chords_lyrics_scraper.py
+      const { stdout, stderr } = await execPromise(`python3 ./fetch_chords_lyrics_scraper.py '${escapedSongName}'`);
       
       // Add detailed debugging to stderr only
       console.log(`Python script execution completed for "${songName}"`);
@@ -128,43 +193,34 @@ class AugmentedChordsApp extends TpaServer {
         console.error(stderr);
       }
       
-      // Parse the JSON output - the stdout should now be ONLY clean JSON
-      let result;
+      // Parse the JSON output
+      let rawData: ScraperResponse;
       
       try {
-        // With the stderr redirection fix, we should get clean JSON in stdout
-        result = JSON.parse(stdout.trim());
+        rawData = JSON.parse(stdout.trim());
         console.log(`Successfully parsed JSON output for "${songName}"`);
       } catch (parseError) {
         console.error("Failed to parse JSON output:", parseError);
         console.error("Raw stdout:", stdout);
         
         // Create a fallback result
-        result = {
+        rawData = {
           success: false,
-          error: "Failed to parse result from Python script",
-          title: songName,
-          song: songName,
+          song_title: songName,
           artist: "",
           key: "Unknown",
-          chords: []
+          lines: []
         };
       }
       
-      if (result.success && result.chords && result.chords.length > 0) {
-        // Script success - update the song data
-        this.songChords = result.chords;
+      if (rawData.success && rawData.lines && rawData.lines.length > 0) {
+        // Process the raw data into our structured format
+        this.currentSong = processSongData(rawData);
         
-        // Get song title and key
-        this.currentSongTitle = result.song || songName;
-        this.currentSongKey = result.key || "Unknown";
-        
-        this.currentStartIndex = 0; // Reset to beginning of song
-        
-        console.log(`Successfully loaded chords for "${this.currentSongTitle}" in key of ${this.currentSongKey}. Found ${this.songChords.length} measures.`);
+        console.log(`Successfully loaded chords for "${this.currentSong.title}" in key of ${this.currentSong.key}. Found ${this.currentSong.sections.length} sections.`);
         
         // Show success message
-        session.layouts.showTextWall(`Found chords for "${this.currentSongTitle}"\nKey: ${this.currentSongKey}\nLoading...`);
+        session.layouts.showTextWall(`Found chords for "${this.currentSong.title}"\nKey: ${this.currentSong.key}\nLoading...`);
         
         setTimeout(() => {
           this.isShowingMessage = false;
@@ -172,13 +228,16 @@ class AugmentedChordsApp extends TpaServer {
         }, 2000);
       } else {
         // Script returned no results or error
-        console.error('Failed to fetch chords:', result.error || 'No chord data found');
+        console.error('Failed to fetch chords:', rawData.success ? 'No chord data found' : rawData.error || 'Unknown error');
         
         session.layouts.showTextWall(`No chord data found for "${songName}"\nTry another song name`);
         
         setTimeout(() => {
           this.isShowingMessage = false;
-          this.updateChordDisplay(session);
+          // If we have a current song, continue displaying it
+          if (this.currentSong) {
+            this.updateChordDisplay(session);
+          }
         }, 3000);
       }
     } catch (error) {
@@ -189,7 +248,10 @@ class AugmentedChordsApp extends TpaServer {
       
       setTimeout(() => {
         this.isShowingMessage = false;
-        this.updateChordDisplay(session);
+        // If we have a current song, continue displaying it
+        if (this.currentSong) {
+          this.updateChordDisplay(session);
+        }
       }, 3000);
     }
   }
@@ -206,108 +268,70 @@ class AugmentedChordsApp extends TpaServer {
     process.stdin.on('data', (key: Buffer) => {
       const keyPress = key.toString();
       
-      // Check for navigation inputs: "]" character from footswitch, right arrow, or left arrow
-      if (keyPress === '\u001B[C' || keyPress === '\u001B[D') {
-        const inputSource = keyPress === '\u001B[C' ? 'Right arrow' : 'Left arrow';
-        
-        console.log(`${inputSource} pressed`);
-        
-        // Ignore input if we're showing a message
-        if (this.isShowingMessage) {
-          console.log('Ignoring input - currently showing a message');
-          return;
-        }
-        
-        // Determine direction - forward for "]" and right arrow, backward for left arrow
-        const isForward = keyPress === '\u001B[C';
-        
-        if (isForward) {
-          console.log('Advancing forward');
-          
-          // Move to the next measure if possible
-          if (this.currentStartIndex < this.songChords.length - 1) {
-            // We can advance as long as we haven't reached the last measure
-            this.currentStartIndex++;
-            this.updateChordDisplay(session);
-          } else {
-            // We've reached the end of the song - loop back to beginning
-            this.isShowingMessage = true; // Block input during end-of-song message
-            session.layouts.showTextWall("End of song - looping back");
-            
-            // Reset to beginning but wait before displaying to avoid timing issues
-            this.currentStartIndex = 0;
-            
-            // Delay showing first measures to give end message time to display
-            setTimeout(() => {
-              this.isShowingMessage = false; // Re-enable input after showing chords
-              this.updateChordDisplay(session);
-            }, 2000);
-          }
-        } else {
-          console.log('Going backward');
-          
-          // Move to the previous measure if possible
-          if (this.currentStartIndex > 0) {
-            this.currentStartIndex--;
-            this.updateChordDisplay(session);
-          } else {
-            // We're at the beginning - show a message
-            this.isShowingMessage = true;
-            session.layouts.showTextWall("Beginning of song");
-            
-            // Re-enable input after showing the message
-            setTimeout(() => {
-              this.isShowingMessage = false;
-              this.updateChordDisplay(session);
-            }, 1500);
-          }
-        }
-      }
+      // Check for ONLY left and right arrow keys
+      const isRightArrow = keyPress === '\u001B[C';
+      const isLeftArrow = keyPress === '\u001B[D';
       
-      // Allow Ctrl+C to exit
+      // Exit if Ctrl+C is pressed
       if (keyPress === '\u0003') {
         process.exit();
       }
+      
+      // If we're showing a message or don't have a song loaded, ignore navigation keys
+      if (this.isShowingMessage || !this.currentSong) {
+        return;
+      }
+      
+      if (isRightArrow || isLeftArrow) {
+        const inputSource = isRightArrow ? 'Right arrow' : 'Left arrow';
+        console.log(`${inputSource} pressed`);
+        
+        if (isRightArrow) {
+          // Navigate to next line
+          this.currentSong = navigateNext(this.currentSong);
+        } else {
+          // Navigate to previous line
+          this.currentSong = navigatePrevious(this.currentSong);
+        }
+        
+        // Update the display with the new position
+        this.updateChordDisplay(session);
+      }
     });
 
-    console.log('Input listener set up. Press "]", Right arrow to advance, Left arrow to go back, or Ctrl+C to exit.');
+    console.log('Input listener set up. Press Right arrow to advance, Left arrow to go back, or Ctrl+C to exit.');
   }
   
   /**
    * Update the chord display on the glasses
    */
   private updateChordDisplay(session: TpaSession): void {
-    // Get the current visible measures (up to 4)
-    const visibleMeasures = this.songChords.slice(
-      this.currentStartIndex, 
-      Math.min(this.currentStartIndex + 4, this.songChords.length)
+    if (!this.currentSong) {
+      // No song loaded, show a message
+      session.layouts.showTextWall("No song loaded. Say 'play [song name]' to load a song.");
+      return;
+    }
+    
+    // Get the current line to display
+    const displayLine = getCurrentLine(this.currentSong);
+    const navInfo = getNavigationInfo(this.currentSong);
+    
+    // Create the display content
+    // Always show the section name with simplified navigation
+    const topContent = `[${displayLine.sectionName}] ${navInfo}`;
+    
+    // Show on the glasses
+    session.layouts.showTextWall(
+      `${this.currentSong.title} - Key of ${this.currentSong.key}` + '\n' +  '\n' +
+      topContent + '\n' + displayLine.chordLine + '\n' + displayLine.lyricLine
     );
     
-    // Format measures with numbering for better visibility
-    const formattedMeasures = visibleMeasures.map((measure, index) => {
-      const measureNumber = this.currentStartIndex + index + 1;
-      return `Measure ${measureNumber}: ${measure}`;
-    });
-    
-    // Create title with song name and key
-    const titleSection = `${this.currentSongTitle} - Key of ${this.currentSongKey} (${this.currentStartIndex + 1}/${this.songChords.length})`;
-    
-    // Display the first two measures in the top section (or fewer if not available)
-    const topSection = formattedMeasures.slice(0, Math.min(3, formattedMeasures.length)).join('\n');
-    
-    // Display the next two measures in the bottom section (or fewer if not available)
-    const bottomSection = formattedMeasures.length > 3 
-      ? formattedMeasures.slice(3, 4).join('\n')
-      : "End of song";
-    
-    // Show on the glasses (indefinitely)
-    session.layouts.showReferenceCard(
-      titleSection,
-      topSection + "\n" + bottomSection
-    );
-    
-    console.log('Currently displaying:', titleSection);
-    console.log('Measures:', formattedMeasures);
+    console.log('Currently displaying:');
+    console.log(`Title: ${this.currentSong.title} - Key of ${this.currentSong.key}`);
+    console.log(`Section: [${displayLine.sectionName}]`);
+    console.log(`Chords: ${displayLine.chordLine}`);
+    console.log(`Lyrics: ${displayLine.lyricLine}`);
+    console.log(`Navigation: ${navInfo}`);
   }
 }
 
