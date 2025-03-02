@@ -69,7 +69,8 @@ class AugmentedChordsApp extends TpaServer {
           } else if (transcription.includes("help") || transcription.includes("instructions")) {
             // Show help message
             this.isShowingMessage = true;
-            session.layouts.showTextWall("Voice Commands:\n- 'play [song name]'\n- 'help'\n\nNavigation:\n- Right arrow: Next\n- Left arrow: Previous");
+            session.layouts.showDoubleTextWall("Voice Commands:\n- 'play [song name by artist]'\n- 'help'", 
+              "Navigation:\n- Right arrow: Next\n- Left arrow: Prev");
             
             setTimeout(() => {
               this.isShowingMessage = false;
@@ -206,9 +207,8 @@ class AugmentedChordsApp extends TpaServer {
       const keyPress = key.toString();
       
       // Check for navigation inputs: "]" character from footswitch, right arrow, or left arrow
-      if (keyPress === ']' || keyPress === '\u001B[C' || keyPress === 'Right' || keyPress === '\u001B[D' || keyPress === 'Left') {
-        const inputSource = keyPress === ']' ? 'Footswitch' : 
-                           (keyPress === '\u001B[C' || keyPress === 'Right') ? 'Right arrow' : 'Left arrow';
+      if (keyPress === '\u001B[C' || keyPress === '\u001B[D') {
+        const inputSource = keyPress === '\u001B[C' ? 'Right arrow' : 'Left arrow';
         
         console.log(`${inputSource} pressed`);
         
@@ -219,7 +219,7 @@ class AugmentedChordsApp extends TpaServer {
         }
         
         // Determine direction - forward for "]" and right arrow, backward for left arrow
-        const isForward = keyPress === ']' || keyPress === '\u001B[C' || keyPress === 'Right';
+        const isForward = keyPress === '\u001B[C';
         
         if (isForward) {
           console.log('Advancing forward');
