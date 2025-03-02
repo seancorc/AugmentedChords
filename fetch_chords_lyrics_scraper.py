@@ -117,6 +117,15 @@ def fetch_chords_lyrics(song_name):
         chord_data_content = json.loads(chord_data_element["data-content"])
         tab_view = chord_data_content.get("store", {}).get("page", {}).get("data", {}).get("tab_view", {})
         
+        
+        # Look for key in different possible locations
+        possible_key_locations = [
+            tab_view.get("meta", {}).get("key"),
+            tab_view.get("key"),
+            tab_view.get("tonality_name"),
+            tab_view.get("meta", {}).get("tonality")
+        ]
+        
         # Extract song information
         song_title = tab_view.get("song_name", chord_result.get("song_name", "Unknown"))
         artist_name = tab_view.get("artist_name", chord_result.get("artist_name", "Unknown"))
@@ -127,6 +136,19 @@ def fetch_chords_lyrics(song_name):
         if tab_view.get("meta", {}).get("capo") is not None:
             capo_information = tab_view.get("meta", {}).get("capo")
             logger.info(f"Found capo information: {capo_information}")
+            
+        # Extract key information if available from meta (similar to capo)
+        key = "Unknown"
+        if tab_view.get("meta", {}).get("tonality") is not None:
+            key = tab_view.get("meta", {}).get("tonality")
+            logger.info(f"Found key information from meta.tonality: {key}")
+        elif tab_view.get("meta", {}).get("key") is not None:
+            key = tab_view.get("meta", {}).get("key")
+            logger.info(f"Found key information from meta.key: {key}")
+        elif tab_view.get("tonality_name"):
+            # Fallback to tonality_name
+            key = tab_view.get("tonality_name")
+            logger.info(f"Using tonality_name for key: {key}")
         
         # Get the chord content
         content = tab_view.get("wiki_tab", {}).get("content", "")
@@ -189,7 +211,6 @@ def fetch_chords_lyrics(song_name):
                 process_regular_section(section_name, section_content, section_pattern, chord_pattern, lines)
         
         # Handle key if it's unknown
-        key = tonality_name
         if key == "Unknown" and lines:
             # Try to infer the key from the first chord
             first_line = lines[0]
@@ -198,6 +219,7 @@ def fetch_chords_lyrics(song_name):
                 key = first_line["chords"][0]
                 # Remove any modifiers (e.g., m7, maj7)
                 key = re.sub(r'(m7|maj7|7|m|sus\d|add\d|dim|aug|\/).*', '', key)
+                logger.info(f"Inferred key from first chord: {key}")
         
         logger.info(f"Extracted {len(lines)} chord-lyric lines from the chord content")
         

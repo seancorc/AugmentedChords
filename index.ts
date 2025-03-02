@@ -31,7 +31,7 @@ const DEFAULT_SONG: ScraperResponse = {
   "song_title": "Let It Be",
   "artist": "The Beatles",
   "key": "C",
-  "capo": undefined,  // Fix type error - use undefined instead of null
+  "capo": undefined,
   "lines": [
     {
       "section": "Intro",
@@ -47,63 +47,203 @@ const DEFAULT_SONG: ScraperResponse = {
     },
     {
       "section": "Verse 1",
-      "chords": ["C", "G", "Am", "Am/G", "Fmaj7", "F6"],
-      "chord_positions": [0, 17, 30, 40, 48, 56],
-      "lyrics": "When I find myself in times of trouble, Mother Mary comes to me"
+      "chords": ["C", "G"],
+      "chord_positions": [7, 26],
+      "lyrics": "When I find myself in times of trouble,"
+    },
+    {
+      "section": "Verse 1",
+      "chords": ["Am/G", "Fmaj7", "F6"],
+      "chord_positions": [0, 16, 32],
+      "lyrics": "Mother Mary comes to me"
     },
     {
       "section": "Verse 1",
       "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
-      "chord_positions": [0, 13, 20, 28, 36, 44],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
       "lyrics": "Speaking words of wisdom, let it be"
     },
     {
       "section": "Verse 1",
-      "chords": ["C", "G", "Am", "Am/G", "Fmaj7", "F6"],
-      "chord_positions": [0, 13, 28, 40, 54, 62],
-      "lyrics": "And in my hour of darkness, she is standing right in front of me"
+      "chords": ["C", "G"],
+      "chord_positions": [7, 26],
+      "lyrics": "And in my hour of darkness,"
+    },
+    {
+      "section": "Verse 1",
+      "chords": ["Am/G", "Fmaj7", "F6"],
+      "chord_positions": [7, 26, 38],
+      "lyrics": "she is standing right in front of me"
     },
     {
       "section": "Verse 1",
       "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
-      "chord_positions": [0, 13, 20, 28, 36, 44],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
       "lyrics": "Speaking words of wisdom, let it be"
     },
     {
       "section": "Chorus",
       "chords": ["Am", "G", "F", "C"],
-      "chord_positions": [0, 12, 24, 36],
+      "chord_positions": [8, 18, 30, 42],
       "lyrics": "Let it be, let it be, let it be, let it be"
     },
     {
       "section": "Chorus",
       "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
-      "chord_positions": [0, 13, 23, 32, 40, 48],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
       "lyrics": "Whisper words of wisdom, let it be"
     },
     {
       "section": "Verse 2",
-      "chords": ["C", "G", "Am", "Am/G", "Fmaj7", "F6"],
-      "chord_positions": [0, 13, 28, 40, 54, 62],
-      "lyrics": "And when the broken hearted people, living in the world agree"
+      "chords": ["C", "G"],
+      "chord_positions": [7, 26],
+      "lyrics": "And when the broken hearted people,"
+    },
+    {
+      "section": "Verse 2",
+      "chords": ["Am/G", "Fmaj7", "F6"],
+      "chord_positions": [0, 16, 32],
+      "lyrics": "living in the world agree"
     },
     {
       "section": "Verse 2",
       "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
-      "chord_positions": [0, 13, 20, 28, 36, 44],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
       "lyrics": "There will be an answer, let it be"
     },
     {
       "section": "Verse 2",
-      "chords": ["C", "G", "Am", "Am/G", "Fmaj7", "F6"],
-      "chord_positions": [0, 13, 28, 40, 54, 62],
-      "lyrics": "For though they may be parted, there is still a chance that they will see"
+      "chords": ["C", "G"],
+      "chord_positions": [8, 24],
+      "lyrics": "For though they may be parted,"
+    },
+    {
+      "section": "Verse 2",
+      "chords": ["Am/G", "Fmaj7", "F6"],
+      "chord_positions": [8, 28, 40],
+      "lyrics": "there is still a chance that they will see"
     },
     {
       "section": "Verse 2",
       "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
-      "chord_positions": [0, 13, 20, 28, 36, 44],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
       "lyrics": "There will be an answer, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["Am", "G", "F", "C"],
+      "chord_positions": [8, 18, 30, 42],
+      "lyrics": "Let it be, let it be, let it be, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
+      "lyrics": "There will be an answer, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["Am", "G", "F", "C"],
+      "chord_positions": [8, 18, 30, 42],
+      "lyrics": "Let it be, let it be, let it be, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
+      "lyrics": "Whisper words of wisdom, let it be"
+    },
+    {
+      "section": "Instrumental",
+      "chords": ["F", "C/E", "Dm7", "C", "Bb", "F/A", "G", "F", "C"],
+      "chord_positions": [0, 4, 9, 14, 19, 23, 28, 33, 38],
+      "lyrics": null,
+      "repeat_info": "x2"
+    },
+    {
+      "section": "Solo",
+      "chords": ["C", "G", "Am", "F", "C", "G", "F", "C"],
+      "chord_positions": [0, 3, 7, 11, 15, 19, 23, 27],
+      "lyrics": null,
+      "repeat_info": "x2"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["Am", "G", "F", "C"],
+      "chord_positions": [8, 18, 30, 42],
+      "lyrics": "Let it be, let it be, let it be, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
+      "lyrics": "Whisper words of wisdom, let it be"
+    },
+    {
+      "section": "Verse 3",
+      "chords": ["C", "G"],
+      "chord_positions": [7, 26],
+      "lyrics": "And when the night is cloudy,"
+    },
+    {
+      "section": "Verse 3",
+      "chords": ["Am/G", "Fmaj7", "F6"],
+      "chord_positions": [0, 16, 32],
+      "lyrics": "there is still a light that shines on me"
+    },
+    {
+      "section": "Verse 3",
+      "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
+      "lyrics": "Shine on till tomorrow, let it be"
+    },
+    {
+      "section": "Verse 3",
+      "chords": ["C", "G"],
+      "chord_positions": [7, 26],
+      "lyrics": "I wake up to the sound of music,"
+    },
+    {
+      "section": "Verse 3",
+      "chords": ["Am/G", "Fmaj7", "F6"],
+      "chord_positions": [0, 16, 32],
+      "lyrics": "Mother Mary comes to me"
+    },
+    {
+      "section": "Verse 3",
+      "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
+      "lyrics": "Speaking words of wisdom, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["Am", "G", "F", "C"],
+      "chord_positions": [8, 18, 30, 42],
+      "lyrics": "Let it be, let it be, let it be, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
+      "lyrics": "There will be an answer, let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["Am", "G", "F", "C"],
+      "chord_positions": [8, 18, 30, 42],
+      "lyrics": "Let it be, let it be, let it be, ya let it be"
+    },
+    {
+      "section": "Chorus",
+      "chords": ["C", "G", "F", "C/E", "Dm7", "C"],
+      "chord_positions": [0, 18, 32, 40, 48, 56],
+      "lyrics": "Whisper words of wisdom, let it be"
+    },
+    {
+      "section": "Outro",
+      "chords": ["F", "C/E", "Dm7", "C", "Bb", "F/A", "G", "F", "C"],
+      "chord_positions": [0, 4, 9, 14, 19, 23, 28, 33, 38],
+      "lyrics": null
     }
   ]
 };
@@ -256,8 +396,8 @@ class AugmentedChordsApp extends TpaServer {
           
           // If not in tuner mode, process regular song commands
           
-          // Check for song requests - look for "play" or "play song" followed by a song name
-          const playCommandMatch = transcription.match(/(?:^|\.\s+|\!\s+|\?\s+)\b(?:play)(?:\s+song)?\s+(.+?)(?:\.|\?|!|$)/i);
+          // Check for song requests - look for "play" followed by a song name anywhere in the text
+          const playCommandMatch = transcription.match(/\bplay\s+(.+?)(?:\.|\?|!|$)/i);
           
           if (playCommandMatch) {
             const songName = playCommandMatch[1].trim();
@@ -429,6 +569,9 @@ class AugmentedChordsApp extends TpaServer {
     if (process.stdin.isTTY) {
       process.stdin.setRawMode(true);
     }
+
+    // Remove all existing 'data' event listeners to prevent duplicates
+    process.stdin.removeAllListeners('data');
 
     process.stdin.on('data', (key: Buffer) => {
       const keyPress = key.toString();

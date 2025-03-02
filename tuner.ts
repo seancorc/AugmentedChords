@@ -443,7 +443,7 @@ export function formatTunerDisplay(tunerState: TunerState): string {
   // Line 2-3: Status and adjustment guidance
   if (!detectedNote || deviation === null) {
     display += `\n\nNo pitch detected. Play a note.`;
-    display += `\n\nSay "tune to [NOTE]" or "exit"`;
+    display += `\n\nSay "tune to [NOTE]" or "exit tuner mode"`;
     return display;
   }
   
