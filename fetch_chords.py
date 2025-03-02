@@ -44,14 +44,16 @@ async def fetch_chords(song_name):
         4. Once on the chord page, follow these steps EXACTLY:
            a. Find and extract the song title shown on the page
            b. Find and extract the artist name shown on the page
-           c. Find the chord chart/progression
-           d. For each line of the chord progression, extract ONLY the chords (ignore all lyrics, section markers, etc)
-           e. Format each measure or line of chords as a simple space-separated string like "C Am F G"
+           c. Find and extract the key of the song if it's shown on the page (look for "Key: X" or similar)
+           d. Find the chord chart/progression
+           e. For each line of the chord progression, extract ONLY the chords (ignore all lyrics, section markers, etc)
+           f. Format each measure or line of chords as a simple space-separated string like "C Am F G"
         
         Return a simple JSON object with this exact structure:
         {{
           "song": "the exact song title from the page",
           "artist": "the exact artist name from the page",
+          "key": "the key of the song (e.g., 'C', 'G', 'Am', etc.) or 'Unknown' if not found",
           "chords": [
             "C Am F G",
             "F G C -",
@@ -123,12 +125,14 @@ async def fetch_chords(song_name):
             chord_data = raw_result.get("chords", [])
             song_title = raw_result.get("song", song_name.title())
             artist_name = raw_result.get("artist", "")
+            key = raw_result.get("key", "Unknown")
             print(f"Got structured data with {len(chord_data)} chords", file=sys.stderr)
         elif isinstance(raw_result, list):
             # We have just an array - assume these are the chords
             chord_data = raw_result
             song_title = song_name.title()
             artist_name = ""
+            key = "Unknown"
             print(f"Got list data with {len(chord_data)} chords", file=sys.stderr)
         elif isinstance(raw_result, str):
             print("Got string data, trying to parse", file=sys.stderr)
@@ -139,12 +143,14 @@ async def fetch_chords(song_name):
                     chord_data = parsed_data.get("chords", [])
                     song_title = parsed_data.get("song", song_name.title())
                     artist_name = parsed_data.get("artist", "")
+                    key = parsed_data.get("key", "Unknown")
                     print(f"Parsed JSON string successfully", file=sys.stderr)
                 else:
                     # If it's a list or something else, treat as chord data
                     chord_data = parsed_data if isinstance(parsed_data, list) else raw_result.split('\n')
                     song_title = song_name.title()
                     artist_name = ""
+                    key = "Unknown"
                     print(f"Parsed non-dict data", file=sys.stderr)
             except json.JSONDecodeError:
                 # If parsing fails, split by newlines
@@ -152,15 +158,17 @@ async def fetch_chords(song_name):
                 chord_data = [line.strip() for line in raw_result.split('\n') if line.strip()]
                 song_title = song_name.title()
                 artist_name = ""
+                key = "Unknown"
         else:
             print(f"Unknown result type: {type(raw_result)}", file=sys.stderr)
             # Create fallback chords with explanation
             chord_data = ["No chord data found - try again or try a different song"]
             song_title = song_name.title()
             artist_name = ""
+            key = "Unknown"
         
         # Format title with artist if available
-        title = f"{song_title} - {artist_name}" if artist_name else song_title
+        title = f"{song_title}"
         
         # Create the final result object
         result = {
@@ -168,6 +176,7 @@ async def fetch_chords(song_name):
             "title": title,
             "song": song_title,
             "artist": artist_name,
+            "key": key,
             "chords": chord_data
         }
         
@@ -184,6 +193,7 @@ async def fetch_chords(song_name):
             "title": song_name,
             "song": song_name.title(),
             "artist": "",
+            "key": "Unknown",
             "chords": []
         })
 
@@ -196,6 +206,7 @@ if __name__ == "__main__":
             "title": "",
             "song": "",
             "artist": "",
+            "key": "Unknown",
             "chords": []
         })
         # Restore stdout only to print the final JSON

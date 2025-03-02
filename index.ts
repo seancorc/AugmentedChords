@@ -25,6 +25,7 @@ class AugmentedChordsApp extends TpaServer {
   private isShowingMessage = false; // Flag to track when displaying transitional messages
   private songChords = [...DEFAULT_SONG_CHORDS]; // Start with the default song
   private currentSongTitle = "Default Song";
+  private currentSongKey = "C"; // Default key for the default song
 
   protected async onSession(session: TpaSession, sessionId: string, userId: string): Promise<void> {
     // Setup keyboard input listener for the footswitch
@@ -144,6 +145,7 @@ class AugmentedChordsApp extends TpaServer {
           title: songName,
           song: songName,
           artist: "",
+          key: "Unknown",
           chords: []
         };
       }
@@ -152,17 +154,16 @@ class AugmentedChordsApp extends TpaServer {
         // Script success - update the song data
         this.songChords = result.chords;
         
-        // Format the title using song and artist if available
-        const songTitle = result.song || songName;
-        const artistName = result.artist || "";
-        this.currentSongTitle = artistName ? `${songTitle} - ${artistName}` : songTitle;
+        // Get song title and key
+        this.currentSongTitle = result.song || songName;
+        this.currentSongKey = result.key || "Unknown";
         
         this.currentStartIndex = 0; // Reset to beginning of song
         
-        console.log(`Successfully loaded chords for "${this.currentSongTitle}". Found ${this.songChords.length} measures.`);
+        console.log(`Successfully loaded chords for "${this.currentSongTitle}" in key of ${this.currentSongKey}. Found ${this.songChords.length} measures.`);
         
         // Show success message
-        session.layouts.showTextWall(`Found chords for "${this.currentSongTitle}"\nLoading...`);
+        session.layouts.showTextWall(`Found chords for "${this.currentSongTitle}"\nKey: ${this.currentSongKey}\nLoading...`);
         
         setTimeout(() => {
           this.isShowingMessage = false;
@@ -288,21 +289,21 @@ class AugmentedChordsApp extends TpaServer {
       return `Measure ${measureNumber}: ${measure}`;
     });
     
-    // Create title with song name
-    const titleSection = `${this.currentSongTitle} (${this.currentStartIndex + 1}/${this.songChords.length})`;
+    // Create title with song name and key
+    const titleSection = `${this.currentSongTitle} - Key of ${this.currentSongKey} (${this.currentStartIndex + 1}/${this.songChords.length})`;
     
     // Display the first two measures in the top section (or fewer if not available)
-    const topSection = titleSection + '\n' + formattedMeasures.slice(0, Math.min(2, formattedMeasures.length)).join('\n');
+    const topSection = formattedMeasures.slice(0, Math.min(3, formattedMeasures.length)).join('\n');
     
     // Display the next two measures in the bottom section (or fewer if not available)
-    const bottomSection = formattedMeasures.length > 2 
-      ? formattedMeasures.slice(2, 4).join('\n')
+    const bottomSection = formattedMeasures.length > 3 
+      ? formattedMeasures.slice(3, 4).join('\n')
       : "End of song";
     
     // Show on the glasses (indefinitely)
-    session.layouts.showDoubleTextWall(
-      topSection || "No measures to display",
-      bottomSection
+    session.layouts.showReferenceCard(
+      titleSection,
+      topSection + "\n" + bottomSection
     );
     
     console.log('Currently displaying:', titleSection);
